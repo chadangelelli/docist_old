@@ -326,6 +326,6 @@
                (swap! colled conj {:location (z/position-span zloc)
                                    :string (z/string zloc)})
                zloc)))
-       (recur (rest paths) 
+       (recur (rest paths)
               (conj collected @colled)
               options)))))

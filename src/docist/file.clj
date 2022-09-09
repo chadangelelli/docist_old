@@ -37,7 +37,7 @@
   ```"
   {:author "Chad A."
    :added "0.1"}
-  [{:keys [dir] :as options}]
+  [{:keys [dir file] :as options}]
   (let [flags (->> (select-keys options [:clj :cljs :edn])
                    (filter second)
                    (map first)
@@ -47,6 +47,10 @@
                   (->> flags
                        (map #(str "." (name %)))
                        (string/join ",")
-                       (format "**{%s}" )))]
-    (map fs/file (fs/glob dir scanner))))
+                       (format "**{%s}" )))
+        files (map fs/file (fs/glob dir scanner))
+        files (if file
+                (conj file (fs/file file))
+                files)]
+    files))
 

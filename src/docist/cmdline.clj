@@ -17,12 +17,12 @@
    ;["-c" "--config FILE" "Provide an EDN config file"]
    ["-d" "--dir DIR" "Directory to process"]
    ["-f" "--file FILE" "File to process"]
-   ["-l" "--clj" "Include CLJ, CLJC. Defaults to true."]
+   ["-l" "--clj" "Include CLJ, CLJC"]
    ["-j" "--cljs" "Include CLJS, CLJC"]
    ["-e" "--edn" "Include EDN"]
    ["-o" "--output-dir DIR" "Directory for generated docs"]
-   ["-m" "--output-format FORMAT" "Format to generate docs"]
-   ["-q" "--quiet" "Only print errors"]])
+   ["-m" "--output-format FORMAT" "Format for generated docs"]
+   ["-q" "--quiet" "Do not print output"]])
 
 (def help
   (fmt/make-help-menu
@@ -79,9 +79,8 @@
       :else
       (case cmd 
         "parse"     (parser/parse (-make-parse-file-list options) options)
+        "gen"       (generator/generate options)
         "get-files" (file/get-files options)
-        "gen"       (-> (parser/parse (-make-parse-file-list options) options)
-                        (generator/generate options)) 
         
         (fmt/echo :error (str "Unknown command " fmt/BOLD cmd fmt/NC))))))
 
