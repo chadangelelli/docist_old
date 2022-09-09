@@ -1,4 +1,7 @@
 (ns docist.parser
+  "Parse Clojure/script source files into Docist Nodes."
+  {:author "Chad Angelelli"
+   :added "0.1"}
   (:require
     [rewrite-clj.zip :as z]
     [rewrite-clj.node :as n]

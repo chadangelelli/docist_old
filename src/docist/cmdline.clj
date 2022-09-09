@@ -5,7 +5,7 @@
     [docist.parser :as parser]
     [docist.file :as file]
     [docist.generator :as generator]
-    [docist.fmt :as fmt :refer [echo BOLD NC]]))
+    [docist.fmt :as fmt :refer [PURPLE NC DOCIST-LOGO]]))
 
   ;["-p" "--path PATH" "Filepath to parse"
   ; :default []
@@ -28,17 +28,23 @@
   (fmt/make-help-menu
     cli-options
 "
-Overview:
+{{ITAL}}Overview:{{NC}}
     Command line interface to Docist.
 
-Syntax:
+{{ITAL}}Commands:{{NC}}
+    {{BOLD}}help{{NC}}       Print help menu
+    {{BOLD}}parse{{NC}}      Parse source files into Docist nodes
+    {{BOLD}}get-files{{NC}}  Get sequence of files to parse
+    {{BOLD}}gen{{NC}}        Generate docs
+
+{{ITAL}}Syntax:{{NC}}
     {{BOLD}}bb -m docist.cmdline CMD [OPTIONS]{{NC}}
     {{BOLD}}bb -m docist.cmdline [OPTIONS] CMD{{NC}}
 
-Options:
+{{ITAL}}Options:{{NC}}
 {{options}}
 
-Examples:
+{{ITAL}}Examples:{{NC}}
     $ bb -m docist.cmdline parse --file=src/docist/parser.clj
 
     $ bb -m docist.cmdline gen \\
@@ -60,6 +66,8 @@ Examples:
          [cmd] :arguments
          {:keys [print-help]} :options
          } (cli/parse-opts *command-line-args* cli-options)]
+
+    (println (str PURPLE DOCIST-LOGO NC))
 
     (cond
       errors

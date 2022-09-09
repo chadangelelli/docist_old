@@ -60,6 +60,7 @@ ________                .__          __
 
 (def NC "\033[0m")
 (def BOLD "\033[1m")
+(def ITAL "\033[3m")
 (def RED "\033[0;31m")
 (def BLUE "\033[0;34m")
 (def GREEN "\033[0;32m")
@@ -111,7 +112,7 @@ ________                .__          __
                         (spaces 4) 
                         BOLD a pad-a NC (spaces 1)
                         BOLD b pad-b NC (spaces 3)
-                        BLUE c pad-c NC)
+                        c pad-c)
                       ))
                   options)]
     (string/join "\n" rows)))
@@ -120,6 +121,7 @@ ________                .__          __
   [options template]
   (-> template
       (string/replace "{{BOLD}}" BOLD)
+      (string/replace "{{ITAL}}" ITAL)
       (string/replace "{{NC}}" NC)
       (string/replace "{{RED}}" RED)
       (string/replace "{{BLUE}}" BLUE)
