@@ -56,7 +56,8 @@
   {:author "Chad A."
    :added "0.1"}
   [zloc]
-  (when-let [ds (-> zloc z/down (z/find-next-token #(string? (z/sexpr %))))]
+  (when-let [ds (or (-> zloc z/down (z/find-next-token #(string? (z/sexpr %))))
+                    (-> zloc z/down (z/find-next-tag :multi-line)))]
     (z/sexpr ds)))
 
 (defn- -set-docstring
