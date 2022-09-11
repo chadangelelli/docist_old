@@ -14,14 +14,14 @@
 
 (def cli-options
   [["-H" "--print-help"]
-   ;["-c" "--config FILE" "Provide an EDN config file"]
    ["-d" "--dir DIR" "Directory to process"]
    ["-f" "--file FILE" "File to process"]
-   ["-l" "--clj" "Include CLJ, CLJC"]
+   ["-c" "--clj" "Include CLJ, CLJC"]
    ["-j" "--cljs" "Include CLJS, CLJC"]
    ["-e" "--edn" "Include EDN"]
    ["-o" "--output-dir DIR" "Directory for generated docs"]
    ["-m" "--output-format FORMAT" "Format for generated docs"]
+   ["-t" "--output-theme THEME" "Theme to render output"]
    ["-q" "--quiet" "Do not print output"]])
 
 (def help

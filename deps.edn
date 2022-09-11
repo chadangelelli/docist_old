@@ -1,7 +1,9 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         rewrite-clj/rewrite-clj {:mvn/version "1.1.45"}
-        babashka/fs {:mvn/version "0.1.11"}}
+        babashka/fs {:mvn/version "0.1.11"}
+        cheshire/cheshire {:mvn/version "5.11.0"}
+        clj-commons/clj-yaml {:mvn/version "0.7.109"}}
  :aliases
  {:repl {:extra-paths ["dev"]
          :extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}

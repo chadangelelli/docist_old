@@ -1,6 +1,6 @@
 (ns 
-  ^{:doc "example-code.ns1 docstring"
-    :author "Mitch Hedberg"
+  ^{:doc "DOCSTRING::example-code.ns1"
+    :author "AUTHOR::example-code.ns1"
     :added "0.1"}
   example-code.ns1
   (:require 

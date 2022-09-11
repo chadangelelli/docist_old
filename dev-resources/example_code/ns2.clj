@@ -1,7 +1,7 @@
 (ns example-code.ns2
-  "example-code.ns2 docstring"
-  {:author "Mitch Hedberg"
-   :added "0.1"}
+  "DOCSTRING::example-code.ns2"
+  {:author "AUTHOR::example-code.ns2"
+   :added "0.2"}
   (:require 
     [clojure.string :as string]
 

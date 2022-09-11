@@ -19,8 +19,8 @@
       (is (= (-> ns-node :location :end-row) 9))
       (is (= (-> ns-node :location :end-col) 33))
       (is (= (-> ns-node :metadata :added) "0.1"))
-      (is (= (-> ns-node :metadata :author) "Mitch Hedberg"))
-      (is (= (-> ns-node :metadata :doc) "example-code.ns1 docstring"))
+      (is (= (-> ns-node :metadata :author) "AUTHOR::example-code.ns1"))
+      (is (= (-> ns-node :metadata :doc) "DOCSTRING::example-code.ns1"))
       (is (= (:node-type ns-node) :ns))
       (is (= (:name ns-node) 'example-code.ns1)))))
 
@@ -35,9 +35,9 @@
       (is (= (-> ns-node :location :start-col) 1))
       (is (= (-> ns-node :location :end-row) 8))
       (is (= (-> ns-node :location :end-col) 33))
-      (is (= (-> ns-node :metadata :added) "0.1"))
-      (is (= (-> ns-node :metadata :author) "Mitch Hedberg"))
-      (is (= (-> ns-node :metadata :doc) "example-code.ns2 docstring"))
+      (is (= (-> ns-node :metadata :added) "0.2"))
+      (is (= (-> ns-node :metadata :author) "AUTHOR::example-code.ns2"))
+      (is (= (-> ns-node :metadata :doc) "DOCSTRING::example-code.ns2"))
       (is (= (:node-type ns-node) :ns))
       (is (= (:name ns-node) 'example-code.ns2)))))
 

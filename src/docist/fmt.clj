@@ -129,3 +129,27 @@ ________                .__          __
       (string/replace "{{ORANGE}}" ORANGE)
       (string/replace "{{GREEN}}" GREEN)
       (string/replace "{{options}}" (make-options-help options))))
+
+(defn get-percent
+  [n total]
+  (Math/floor (* (/ (double n) total) 100.0)))
+
+(defn make-progress-bar
+  [step total-steps & [max-msg msg]]
+  (Thread/sleep 1000)
+  (let [p (get-percent step total-steps)
+        mw (- 30 5 2); printing percent is 5 chars, the brackets are 2
+        w (int (Math/floor (/ (* p mw) 100.0)))]
+    (format "\r%s[%s%s%s]%s  %s%s"
+            PURPLE 
+            (str p (if (= p 100) "% " "% "))
+            (apply str (repeat w \=)) 
+            (apply str (repeat (- mw w) \space))
+            NC 
+            msg
+            (apply str (repeat (- max-msg (count msg)) \space)))))
+
+(defn print-progress-bar
+  [step total-steps & [max-msg msg]]
+  (print (make-progress-bar step total-steps max-msg msg))
+  (flush))
