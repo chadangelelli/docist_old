@@ -7,7 +7,7 @@
 
 (println (str PURPLE GENERATOR-TEST NC))
 
-(echo :debug "---->" (g/generate {:dir "src/docist" :theme "markdown"}))
+(g/generate {:dir "src/docist" :theme "markdown"})
 
 (testing "edn generator"
   )

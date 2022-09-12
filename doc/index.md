@@ -14,7 +14,6 @@
 
 
 
-
 #### Publics
 
 [cli-options](docist.cmdline#cli-options), [help](docist.cmdline#help), [-main](docist.cmdline#-main), 
@@ -28,13 +27,12 @@
 
 
 
+
+:added: 0.1
+
+:author: Chad Angelelli
+
 Provides file-related utilities
-
-> Author: Chad Angelelli
-
-
-> Added: 0.1
-
 
 
 
@@ -61,13 +59,12 @@ Provides file-related utilities
 
 
 
+
 Formatting tools and vars.
 
-  - Logo Ascii art generated using https://patorjk.com/software/taag/#p=display&amp;f=Graffiti&amp;t=Type%20Something%20
-  - Test Ascii art generated using https://patorjk.com/software/taag/#p=display&amp;f=Rectangles&amp;t=Parser%20Test 
+  - Logo Ascii art generated using https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+  - Test Ascii art generated using https://patorjk.com/software/taag/#p=display&f=Rectangles&t=Parser%20Test 
   
-
-
 
 
 
@@ -140,6 +137,11 @@ Formatting tools and vars.
 
 
 
+
+:added: 0.1
+
+:author: Chad Angelelli
+
 Generate static documentation from source files.
 
   ## Output formats:
@@ -148,19 +150,13 @@ Generate static documentation from source files.
   2. `:json`: JSON string
   3. `:yaml`: YAML string
 
-  &gt; _NOTE_: Output is processed by default via `categorize-parsed`. 
+  > _NOTE_: Output is processed by default via `categorize-parsed`. 
   Provide `:uncategorized?` option to disable.
 
   ## Defaults
 
-  - `:output-dir`: &quot;doc&quot;
+  - `:output-dir`: "doc"
   - `:output-format`: `:edn`
-
-> Author: Chad Angelelli
-
-
-> Added: 0.1
-
 
 
 
@@ -189,13 +185,12 @@ Generate static documentation from source files.
 
 
 
+
+:added: 0.1
+
+:author: Chad Angelelli
+
 Parse Clojure/script source files into Docist Nodes.
-
-> Author: Chad Angelelli
-
-
-> Added: 0.1
-
 
 
 
@@ -215,7 +210,6 @@ Parse Clojure/script source files into Docist Nodes.
 
 
 ## [docist.util](docist.util.md)
-
 
 
 

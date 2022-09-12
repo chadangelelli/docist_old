@@ -18,7 +18,7 @@
   {:author "Chad Angelelli"
    :added "0.1"}
 
-  (:require 
+  (:require
     [cheshire.core :as json]
     [clj-yaml.core :as yaml]
     [selmer.parser :as selmer]
@@ -104,7 +104,8 @@
         ns-tpl (get-template theme :namespace)
         ctx {:_ data :_options options}
         index (selmer/render idx-tpl ctx)
-        namespaces (map (fn [[ns-nm spec]] [ns-nm (selmer/render ns-tpl spec)]) 
+        namespaces (map (fn [[ns-nm spec]] 
+                          [ns-nm (selmer/render ns-tpl {:_ spec})]) 
                         (:_ ctx))
         ext (case (keyword theme)
               (:markdown :md :hugo-markdown) "md"

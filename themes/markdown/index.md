@@ -3,13 +3,10 @@
 
 {% for node in symbols.publics %}
 {% ifequal node.node-type :ns %}
-{{ node.metadata.doc }}
-{% if node.metadata.author %}
-> Author: {{ node.metadata.author }}
-{% endif %}
-{% if node.metadata.added %}
-> Added: {{ node.metadata.added }}
-{% endif %}
+{% if node.metadata %}{% for k,v in node.metadata %}{% ifunequal k :doc %}
+{{ k }}: {{ v }}
+{% endifunequal %}{% endfor %}{% endif %}
+{% safe %}{{ node.metadata.doc }}{% endsafe %}
 {% endifequal %}
 {% endfor %}
 
