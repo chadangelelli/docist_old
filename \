@@ -14,14 +14,13 @@
 
   - `:output-dir`: \"doc\"
   - `:output-format`: `:edn`"
-
+  
   {:author "Chad Angelelli"
    :added "0.1"}
-
+  
   (:require 
     [cheshire.core :as json]
     [clj-yaml.core :as yaml]
-    [selmer.parser :as selmer]
 
     [docist.file :as file]
     [docist.parser :as parser]
@@ -29,12 +28,12 @@
 
 (defn categorize-parsed
   "Return categorized map of `{NAMESPACE {:publics [..] :privates []}`.
-
+  
   Example:
-
+  
   ```clojure
   (let [parsed (docist.parser/parse [\"src/docist/parser.clj\"])] 
-  (docist.generator/categorize-parsed parsed))
+    (docist.generator/categorize-parsed parsed))
   ```"
   {:author "Chad Angelelli"
    :added "0.1"}
@@ -74,7 +73,7 @@
         [["Must provide :dir, :file or :config"
           #(every? not [(:dir %) (:file %) (:config %)])]
          ["Must provide a theme for rendering output format"
-          #(not (:theme %))]]]
+          #(not (:output-theme %))]]]
     (loop [checks checks, errs []]
       (if (empty? checks)
         (when (seq errs)
@@ -91,29 +90,20 @@
   [theme filename]
   (let [nm (name filename)
         theme-dir (str "themes/" (name theme))]
-    (try (slurp (file/find-file theme-dir (str nm "\\..*")))
-         (catch Throwable _
-           (str "Cannot find template " BOLD theme-dir "/" nm NC)))))
+    (or (file/get-file theme-dir nm)
+        (throw (Exception. (str "Cannot find template " 
+                                BOLD theme-dir "/" nm NC))))))
 
 (defn render
-  "Render context to disk using theme. Returns nil or throws."
+  "Render context to disk using output-theme."
   {:author "Chad Angelelli"
    :added "0.1"}
-  [data {:keys [theme output-dir] :as options}]
-  (let [idx-tpl (get-template theme :index)
-        ns-tpl (get-template theme :namespace)
-        ctx {:_ data :_options options}
-        index (selmer/render idx-tpl ctx)
-        namespaces (map (fn [[ns-nm spec]] [ns-nm (selmer/render ns-tpl spec)]) 
-                        (:_ ctx))
-        ext (case (keyword theme)
-              (:markdown :md :hugo-markdown) "md"
-              (:html :hugo-html) "html")]
-    (file/create-dir output-dir)
-    (spit (format "%s/index.%s" output-dir ext) index)
-    (doseq [[ns-nm contents] namespaces]
-      (spit (format "%s/%s.%s" output-dir ns-nm ext) contents))
-    nil))
+  [context {:keys [output-theme] :as options}]
+  (let [idx-tpl (get-template output-theme :index)
+        ns-tpl (get-template output-theme :namespace)]
+    (fmt/echo :debug "----> idx-tpl:\n" idx-tpl)
+    (fmt/echo :debug "----> ns-tpl:\n" ns-tpl)
+   ))
 
 (defn generate
   [{:keys [clj cljs edn output-dir output-format quiet]

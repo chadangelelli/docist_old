@@ -21,7 +21,7 @@
    ["-e" "--edn" "Include EDN"]
    ["-o" "--output-dir DIR" "Directory for generated docs"]
    ["-m" "--output-format FORMAT" "Format for generated docs"]
-   ["-t" "--output-theme THEME" "Theme to render output"]
+   ["-t" "--theme THEME" "Theme to render output"]
    ["-q" "--quiet" "Do not print output"]])
 
 (def help
@@ -64,10 +64,10 @@
 (defn -main [& _]
   (let [{:keys [options errors]
          [cmd] :arguments
-         {:keys [print-help]} :options
+         {:keys [print-help quiet]} :options
          } (cli/parse-opts *command-line-args* cli-options)]
 
-    (println (str PURPLE DOCIST-LOGO NC))
+    (when-not quiet (println (str PURPLE DOCIST-LOGO NC)))
 
     (cond
       errors

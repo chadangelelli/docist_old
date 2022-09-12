@@ -3,7 +3,8 @@
         rewrite-clj/rewrite-clj {:mvn/version "1.1.45"}
         babashka/fs {:mvn/version "0.1.11"}
         cheshire/cheshire {:mvn/version "5.11.0"}
-        clj-commons/clj-yaml {:mvn/version "0.7.109"}}
+        clj-commons/clj-yaml {:mvn/version "0.7.109"}
+        selmer/selmer {:mvn/version "1.12.53"}}
  :aliases
  {:repl {:extra-paths ["dev"]
          :extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}
@@ -15,7 +16,7 @@
                       {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
          :main-opts ["-m" "cognitect.test-runner"]
          :exec-fn cognitect.test-runner.api/test}
-  :test-refresh {:extra-paths ["test"]
+  :test-refresh {:extra-paths ["test" "themes"]
                  :extra-deps {com.jakemccrary/test-refresh 
                               {:mvn/version "0.25.0"}}
                  :main-opts ["-m" "com.jakemccrary.test-refresh"]}}}

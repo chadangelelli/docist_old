@@ -3,24 +3,30 @@
     [clojure.test :refer [is testing deftest]]
     
     [docist.generator :as g]
-    [docist.generator.markdown :as md]
-    [docist.fmt :refer [echo]]))
+    [docist.fmt :refer [echo PURPLE GENERATOR-TEST NC]]))
 
+(println (str PURPLE GENERATOR-TEST NC))
 
-(echo :debug "---->"
-      )
+(echo :debug "---->" (g/generate {:dir "src/docist" :theme "markdown"}))
 
 (testing "edn generator"
-  )
-
-(testing "html generator"
   )
 
 (testing "json generator"
   )
 
-(testing "markdown generator"
-  )
-
 (testing "yaml generator"
   )
+
+(testing "markdown theme"
+  )
+
+(testing "html theme"
+  )
+
+(testing "hugo-markdown theme"
+  )
+
+(testing "hugo-html theme"
+  )
+

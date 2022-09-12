@@ -136,7 +136,6 @@ ________                .__          __
 
 (defn make-progress-bar
   [step total-steps & [max-msg msg]]
-  (Thread/sleep 1000)
   (let [p (get-percent step total-steps)
         mw (- 30 5 2); printing percent is 5 chars, the brackets are 2
         w (int (Math/floor (/ (* p mw) 100.0)))]

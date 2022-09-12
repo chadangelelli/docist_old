@@ -4,7 +4,9 @@
    :added "0.1"}
   (:require
     [clojure.string :as string]
-    [babashka.fs :as fs]))
+    [babashka.fs :as fs]
+    
+    [docist.fmt :as fmt]))
 
 (defn ->file
   "Return clojure.java.io/file object for path.
@@ -54,3 +56,24 @@
                 files)]
     files))
 
+(defn find-file
+  "Recursively search dir. Return file object of first match for pattern."
+  {:author "Chad A."
+   :added "0.1"}
+  [dir pat]
+  (try (-> (fs/match dir (str "regex:" pat)) first fs/file)
+       (catch Throwable _ nil)))
+
+(defn directory?
+  "Returns true if directory exists and is a directory."
+  {:author "Chad A."
+   :added "0.1"}
+  [dir]
+  (fs/directory? dir))
+
+(defn create-dir 
+  "Creates directory if it doesn't exist."
+  [dir]
+  (when-not (directory? dir)
+    (fs/create-dir dir)
+    nil))
