@@ -49,8 +49,9 @@
 
     $ bb -m docist.cmdline gen \\
         --dir=src/docist \\
-        --export-dir=doc/docist/api \\
-        --output-format=hugo-markdown
+        --output-dir=doc \\
+        --output-format=edn \\
+        --theme=hugo-markdown
 "))
 
 (defn- -make-parse-file-list

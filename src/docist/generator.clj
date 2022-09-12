@@ -22,6 +22,7 @@
     [cheshire.core :as json]
     [clj-yaml.core :as yaml]
     [selmer.parser :as selmer]
+    [selmer.filters :as sf]
     [markdown.core :as md]
 
     [docist.file :as file]
@@ -98,7 +99,7 @@
          (catch Throwable _
            (str "Cannot find template " BOLD theme-dir "/" nm NC)))))
 
-(selmer/add-filter! :md-to-html (fn md-to-html [s] (md/md-to-html-string s)))
+(sf/add-filter! :md-to-html (fn md-to-html [s] (md/md-to-html-string s)))
 
 (defn render
   "Render context to disk using theme. Returns nil or throws."
