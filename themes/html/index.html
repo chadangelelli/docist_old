@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ project }}</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    {% for ns,symbols in _|sort %}
+        <h1><a href="{{ns}}.html">{{ ns }}</a></h1>
+        {% if symbols.ns.metadata %}
+            <blockquote>
+            {% for k,v in symbols.ns.metadata|sort %}
+                {% ifunequal k :doc %}
+                    {{ k }}: {{ v }}
+                {% endifunequal %}
+            {% endfor %}
+            </blockquote>
+        {% endif %}
+        <div class="docstring">
+            {% safe %}{{ symbols.ns.metadata.doc|md-to-html }}{% endsafe %}
+        </div>
+
+        <h3>Publics</h3>
+
+        {% for node in symbols.publics %}
+            {% ifunequal node.node-type :ns %}
+                <a href="{{ns}}.html#{{node.name}}">{{ node.name }}</a>, 
+            {% endifunequal %}
+        {% endfor %}
+
+        <h3>Privates</h3>
+        {% for node in symbols.privates %}
+            <a href="{{ns}}.html#{{node.name}}">{{ node.name }}</a>, 
+        {% endfor %}
+    {% endfor %}
+    
+    <script src="js/site.js"></script>
+</body>
+</html>

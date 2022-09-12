@@ -73,7 +73,31 @@
 
 (defn create-dir 
   "Creates directory if it doesn't exist."
+  {:author "Chad A."
+   :added "0.1"}
   [dir]
   (when-not (directory? dir)
     (fs/create-dir dir)
     nil))
+
+(defn delete-dir
+  "Deletes dir if exists. Returns nil or throws."
+  {:author "Chad A."
+   :added "0.1"}
+  [dir]
+  (when (directory? dir)
+    (fs/delete-tree dir)))
+
+(defn make-theme-dir
+  "Returns string for theme directory."
+  {:author "Chad A."
+   :added "0.1"}
+  [theme]
+  (str "themes/" (name theme)))
+
+(defn copy-theme
+  "Copies all files from theme except Index/Namespace templates."
+  {:author "Chad A."
+   :added "0.1"}
+  [theme output-dir]
+  (fs/copy-tree (make-theme-dir theme) output-dir))

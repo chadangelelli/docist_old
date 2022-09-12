@@ -4,6 +4,7 @@
         babashka/fs {:mvn/version "0.1.11"}
         cheshire/cheshire {:mvn/version "5.11.0"}
         clj-commons/clj-yaml {:mvn/version "0.7.109"}
+        markdown-clj/markdown-clj {:mvn/version "1.11.3"}
         selmer/selmer {:mvn/version "1.12.53"}}
  :aliases
  {:repl {:extra-paths ["dev"]

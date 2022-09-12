@@ -22,13 +22,14 @@
     [cheshire.core :as json]
     [clj-yaml.core :as yaml]
     [selmer.parser :as selmer]
+    [markdown.core :as md]
 
     [docist.file :as file]
     [docist.parser :as parser]
     [docist.fmt :as fmt :refer [BOLD NC]]))
 
 (defn categorize-parsed
-  "Return categorized map of `{NAMESPACE {:publics [..] :privates []}`.
+  "Return categorized map of `{NAMESPACE {:ns {..} :publics [..] :privates []}`.
 
   Example:
 
@@ -43,11 +44,13 @@
    (if (empty? parsed)
      out
      (let [[ns-symbol ns-vars] (first parsed)
-           categorized (reduce #(update %1 
-                                        (if (:private? %2) :privates :publics)
-                                        conj
-                                        %2)
-                               {:publics [] :privates []}
+           categorized (reduce #(if (= (:node-type %2) :ns)
+                                  (assoc %1 :ns %2)
+                                  (update %1 
+                                          (if (:private? %2) :privates :publics)
+                                          conj
+                                          %2))
+                               {:ns {} :publics [] :privates []}
                                ns-vars)]
        (recur (rest parsed)
               (assoc out ns-symbol categorized))))))
@@ -90,10 +93,12 @@
    :added "0.1"}
   [theme filename]
   (let [nm (name filename)
-        theme-dir (str "themes/" (name theme))]
+        theme-dir (file/make-theme-dir theme)]
     (try (slurp (file/find-file theme-dir (str nm "\\..*")))
          (catch Throwable _
            (str "Cannot find template " BOLD theme-dir "/" nm NC)))))
+
+(selmer/add-filter! :md-to-html (fn md-to-html [s] (md/md-to-html-string s)))
 
 (defn render
   "Render context to disk using theme. Returns nil or throws."
@@ -110,7 +115,9 @@
         ext (case (keyword theme)
               (:markdown :md :hugo-markdown) "md"
               (:html :hugo-html) "html")]
+    (file/delete-dir output-dir)
     (file/create-dir output-dir)
+    (file/copy-theme theme output-dir)
     (spit (format "%s/index.%s" output-dir ext) index)
     (doseq [[ns-nm contents] namespaces]
       (spit (format "%s/%s.%s" output-dir ns-nm ext) contents))
